@@ -7,7 +7,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T18:39:00.977440+01:00[Europe/Zurich]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T19:49:48.701044+01:00[Europe/Zurich]")
 @Controller
 @RequestMapping("${openapi.petstoretroublemaker.base-path:/api/v3}")
 public class PetApiController implements PetApi {

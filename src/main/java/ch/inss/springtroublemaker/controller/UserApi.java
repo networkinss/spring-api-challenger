@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T18:39:00.977440+01:00[Europe/Zurich]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T19:49:48.701044+01:00[Europe/Zurich]")
 @Validated
 @Tag(name = "user", description = "the user API")
 public interface UserApi {
@@ -73,7 +73,7 @@ public interface UserApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 
@@ -113,7 +113,7 @@ public interface UserApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 
@@ -142,7 +142,7 @@ public interface UserApi {
     default ResponseEntity<Void> deleteUser(
         @Parameter(name = "username", description = "The name that needs to be deleted", required = true, schema = @Schema(description = "")) @PathVariable("username") String username
     ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
@@ -183,7 +183,7 @@ public interface UserApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 
@@ -215,7 +215,7 @@ public interface UserApi {
         @Parameter(name = "username", description = "The user name for login", schema = @Schema(description = "")) @Valid @RequestParam(value = "username", required = false) String username,
         @Parameter(name = "password", description = "The password for login in clear text", schema = @Schema(description = "")) @Valid @RequestParam(value = "password", required = false) String password
     ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
@@ -241,7 +241,7 @@ public interface UserApi {
     default ResponseEntity<Void> logoutUser(
         
     ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
@@ -271,7 +271,7 @@ public interface UserApi {
         @Parameter(name = "username", description = "name that need to be deleted", required = true, schema = @Schema(description = "")) @PathVariable("username") String username,
         @Parameter(name = "User", description = "Update an existent user in the store", schema = @Schema(description = "")) @Valid @RequestBody(required = false) User user
     ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 

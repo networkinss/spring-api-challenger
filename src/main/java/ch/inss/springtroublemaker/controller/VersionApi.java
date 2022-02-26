@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T18:39:00.977440+01:00[Europe/Zurich]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T19:49:48.701044+01:00[Europe/Zurich]")
 @Validated
 @Tag(name = "version", description = "the version API")
 public interface VersionApi {
@@ -65,14 +65,14 @@ public interface VersionApi {
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
-                    String exampleString = "";
-                    ApiUtil.setExampleResponse(request, "", exampleString);
+                if (mediaType.isCompatibleWith(MediaType.valueOf("text/plain"))) {
+                    String exampleString = "Version 1.0.0";
+                    ApiUtil.setExampleResponse(request, "text/plain", exampleString);
                     break;
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 

@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T18:39:00.977440+01:00[Europe/Zurich]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T19:49:48.701044+01:00[Europe/Zurich]")
 @Validated
 @Tag(name = "oops", description = "the oops API")
 public interface OopsApi {
@@ -49,7 +49,7 @@ public interface OopsApi {
     @Operation(
         operationId = "failingRequest",
         summary = "Always fails",
-        tags = { "troublemaker", "failing" },
+        tags = { "troublemaker" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Never returned.", content = @Content(mediaType = "application/json", schema = @Schema(implementation =  String.class))),
             @ApiResponse(responseCode = "304", description = "Not modified."),
@@ -59,12 +59,21 @@ public interface OopsApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/oops",
-        produces = { "text/plain", "application/json" }
+        produces = { "application/json" }
     )
-    default ResponseEntity<String> failingRequest(
-        
+    default ResponseEntity<RestError> failingRequest(
+
     ) {
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"path\" : \"/api/owners\", \"trace\" : \"com.atlassian.oai.validator.springmvc.InvalidRequestException: ...\", \"error\" : \"Bad Request\", \"message\" : \"Request failed schema validation\", \"status\" : 400, \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.valueOf(400));
 
     }
 

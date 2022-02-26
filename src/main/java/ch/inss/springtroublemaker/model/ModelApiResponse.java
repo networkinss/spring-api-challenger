@@ -18,7 +18,7 @@ import javax.annotation.Generated;
  * ModelApiResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T18:39:00.977440+01:00[Europe/Zurich]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T19:49:48.701044+01:00[Europe/Zurich]")
 public class ModelApiResponse   {
 
   @JsonProperty("code")

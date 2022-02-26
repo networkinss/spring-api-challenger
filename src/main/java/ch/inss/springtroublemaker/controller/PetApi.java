@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T18:39:00.977440+01:00[Europe/Zurich]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T19:49:48.701044+01:00[Europe/Zurich]")
 @Validated
 @Tag(name = "pet", description = "the pet API")
 public interface PetApi {
@@ -77,7 +77,7 @@ public interface PetApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 
@@ -109,7 +109,7 @@ public interface PetApi {
         @Parameter(name = "petId", description = "Pet id to delete", required = true, schema = @Schema(description = "")) @PathVariable("petId") Long petId,
         @Parameter(name = "API_KEY", description = "Api key.", schema = @Schema(description = "")) @RequestHeader(value = "API_KEY", required = false) String API_KEY
     ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
@@ -151,7 +151,7 @@ public interface PetApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 
@@ -193,7 +193,7 @@ public interface PetApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 
@@ -210,7 +210,7 @@ public interface PetApi {
     @Operation(
         operationId = "getPetById",
         summary = "Find pet by ID",
-        tags = { "pet", "troublemaker" },
+        tags = { "pet" },
         responses = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation =  Pet.class))),
             @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
@@ -238,7 +238,7 @@ public interface PetApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 
@@ -285,7 +285,7 @@ public interface PetApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 
@@ -319,7 +319,7 @@ public interface PetApi {
         @Parameter(name = "name", description = "Name of pet that needs to be updated", schema = @Schema(description = "")) @Valid @RequestParam(value = "name", required = false) String name,
         @Parameter(name = "status", description = "Status of pet that needs to be updated", schema = @Schema(description = "")) @Valid @RequestParam(value = "status", required = false) String status
     ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
@@ -364,7 +364,7 @@ public interface PetApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 

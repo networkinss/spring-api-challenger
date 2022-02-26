@@ -1,698 +1,596 @@
 openapi: 3.0.2
 info:
-  contact:
-    email: openapi@inss.ch
+  title: Petstore - OpenAPI 3.0
   description: |-
     Forked and modified by International Network Support & Service - Glas.
     This document contains some more endpoints containing APIs that don't have only common formats like application/json and other commonly used formats, and contains also float numbers and Umlaute.
     This is to test & check if a tool can handle also those formats.
+  termsOfService: http://inss.ch
+  contact:
+    email: openapi@inss.ch
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: http://inss.ch
-  title: Swagger Petstore - OpenAPI 3.0
   version: 1.0.0
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-- url: /api/v3
+  - url: /api/v3
 tags:
-- description: APIs causing possibly issues.
-  name: troublemaker
-- description: Everything about your Pets
-  externalDocs:
-    description: Find out more
-    url: http://swagger.io
-  name: pet
-- description: Operations about user
-  name: store
-- description: Access to Petstore orders
-  externalDocs:
-    description: Find out more about our store
-    url: http://swagger.io
-  name: user
+  - name: troublemaker
+    description: APIs causing possibly issues.
+  - name: pet
+    description: Everything about your Pets
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: store
+    description: Operations about user
+  - name: user
+    description: Access to Petstore orders
+    externalDocs:
+      description: Find out more about our store
+      url: http://swagger.io
 paths:
   /books:
     get:
+      tags:
+        - book-controller
+      summary: getAll
       operationId: getAllUsingGET
       responses:
-        "200":
+        200:
+          description: OK
           content:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/ResourcesBookResource'
-          description: OK
-        "401":
-          content: {}
+        401:
           description: Unauthorized
-        "403":
           content: {}
+        403:
           description: Forbidden
-        "404":
           content: {}
+        404:
           description: Not Found
-      summary: getAll
-      tags:
-      - book-controller
-      x-accepts: application/hal+json
-      x-tags:
-      - tag: book-controller
+          content: {}
   /books/{customerId}:
     get:
+      tags:
+        - book-controller
+      summary: getAllByCustomerId
       operationId: getAllByCustomerIdUsingGET
       parameters:
-      - description: customerId
-        explode: false
-        in: path
-        name: customerId
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
+        - name: customerId
+          in: path
+          description: customerId
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
-        "200":
+        200:
+          description: OK
           content:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/ResourcesBookResource'
-          description: OK
-        "401":
-          content: {}
+        401:
           description: Unauthorized
-        "403":
           content: {}
+        403:
           description: Forbidden
-        "404":
           content: {}
+        404:
           description: Not Found
-      summary: getAllByCustomerId
-      tags:
-      - book-controller
-      x-accepts: application/hal+json
-      x-tags:
-      - tag: book-controller
+          content: {}
   /customers:
     get:
+      tags:
+        - customer-controller
+      summary: getAll
       operationId: getAllUsingGET_1
       responses:
-        "200":
+        200:
+          description: OK
           content:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/ResourcesCustomerResource'
-          description: OK
-        "401":
-          content: {}
+        401:
           description: Unauthorized
-        "403":
           content: {}
+        403:
           description: Forbidden
-        "404":
           content: {}
+        404:
           description: Not Found
-      summary: getAll
-      tags:
-      - customer-controller
-      x-accepts: application/hal+json
-      x-tags:
-      - tag: customer-controller
-    post:
-      operationId: insertUsingPOST
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Customer'
-        description: newCustomerResource
-        required: true
-      responses:
-        "200":
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/ResourceCustomerResource'
-          description: OK
-        "201":
           content: {}
-          description: Created
-        "401":
-          content: {}
-          description: Unauthorized
-        "403":
-          content: {}
-          description: Forbidden
-        "404":
-          content: {}
-          description: Not Found
-      summary: insert
-      tags:
-      - customer-controller
-      x-codegen-request-body-name: newCustomerResource
-      x-contentType: application/json
-      x-accepts: application/hal+json
-      x-tags:
-      - tag: customer-controller
     put:
+      tags:
+        - customer-controller
+      summary: update
       operationId: updateUsingPUT
       requestBody:
+        description: updCustomerResource
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Customer'
-        description: updCustomerResource
         required: true
       responses:
-        "200":
+        200:
+          description: OK
           content:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/ResourceCustomerResource'
-          description: OK
-        "201":
-          content: {}
+        201:
           description: Created
-        "401":
           content: {}
+        401:
           description: Unauthorized
-        "403":
           content: {}
+        403:
           description: Forbidden
-        "404":
           content: {}
+        404:
           description: Not Found
-      summary: update
-      tags:
-      - customer-controller
+          content: {}
       x-codegen-request-body-name: updCustomerResource
-      x-contentType: application/json
-      x-accepts: application/hal+json
-      x-tags:
-      - tag: customer-controller
+    post:
+      tags:
+        - customer-controller
+      summary: insert
+      operationId: insertUsingPOST
+      requestBody:
+        description: newCustomerResource
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ResourceCustomerResource'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: newCustomerResource
   /customers/{id}:
+    get:
+      tags:
+        - customer-controller
+      summary: get
+      operationId: getUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ResourceCustomerResource'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
     delete:
+      tags:
+        - customer-controller
+      summary: delete
       operationId: deleteUsingDELETE
       parameters:
-      - description: id
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
-        "200":
+        200:
+          description: OK
           content:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Resourceobject'
-          description: OK
-        "204":
-          content: {}
+        204:
           description: No Content
-        "401":
           content: {}
+        401:
           description: Unauthorized
-        "403":
           content: {}
+        403:
           description: Forbidden
-      summary: delete
-      tags:
-      - customer-controller
-      x-accepts: application/hal+json
-      x-tags:
-      - tag: customer-controller
-    get:
-      operationId: getUsingGET
-      parameters:
-      - description: id
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/ResourceCustomerResource'
-          description: OK
-        "401":
           content: {}
-          description: Unauthorized
-        "403":
-          content: {}
-          description: Forbidden
-        "404":
-          content: {}
-          description: Not Found
-      summary: get
-      tags:
-      - customer-controller
-      x-accepts: application/hal+json
-      x-tags:
-      - tag: customer-controller
   /customers/{id}/v2:
     get:
+      tags:
+        - customer-controller
+      summary: getWithoutGeneralLinks
       operationId: getWithoutGeneralLinksUsingGET
       parameters:
-      - description: id
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
-        "200":
+        200:
+          description: OK
           content:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/CustomerResource'
-          description: OK
-        "401":
-          content: {}
+        401:
           description: Unauthorized
-        "403":
           content: {}
+        403:
           description: Forbidden
-        "404":
           content: {}
+        404:
           description: Not Found
-      summary: getWithoutGeneralLinks
-      tags:
-      - customer-controller
-      x-accepts: application/hal+json
-      x-tags:
-      - tag: customer-controller
+          content: {}
   /pet:
-    post:
-      description: Add a new pet to the store
-      operationId: addPet
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pet'
-        description: Create a new pet in the store
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pet'
-          description: Successful operation
-        "405":
-          description: Invalid input
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      summary: Add a new pet to the store
-      tags:
-      - pet
-      x-contentType: application/json
-      x-accepts: application/json
-      x-tags:
-      - tag: pet
     put:
+      tags:
+        - pet
+      summary: Update an existing pet
       description: Update an existing pet by Id
       operationId: updatePet
       requestBody:
+        description: Update an existent pet in the store
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Pet'
-        description: Update an existent pet in the store
         required: true
       responses:
-        "200":
+        '200':
+          description: Successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pet'
-          description: Successful operation
-        "400":
+        '400':
           description: Invalid ID supplied
-        "404":
+        '404':
           description: Pet not found
-        "405":
+        '405':
           description: Validation exception
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      summary: Update an existing pet
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    post:
       tags:
-      - pet
-      x-contentType: application/json
-      x-accepts: application/json
-      x-tags:
-      - tag: pet
+        - pet
+      summary: Add a new pet to the store
+      description: Add a new pet to the store
+      operationId: addPet
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '405':
+          description: Invalid input
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
   /pet/findbystatus:
     get:
+      tags:
+        - pet
+      summary: Finds Pets by status
       description: Multiple status values can be provided with comma separated strings
       operationId: findPetsByStatus
       parameters:
-      - description: Status values that need to be considered for filter
-        explode: true
-        in: query
-        name: status
-        required: false
-        schema:
-          default: available
-          enum:
-          - available
-          - pending
-          - sold
-          example: available
-          type: string
-        style: form
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: available
+            enum:
+              - available
+              - pending
+              - sold
+            example: available
       responses:
-        "200":
+        '200':
+          description: successful operation
           content:
             application/json:
               schema:
+                type: array
                 items:
                   $ref: '#/components/schemas/Pet'
-                type: array
-          description: successful operation
-        "400":
+        '400':
           description: Invalid status value
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      summary: Finds Pets by status
-      tags:
-      - pet
-      x-accepts: application/json
-      x-tags:
-      - tag: pet
+        - petstore_auth:
+            - write:pets
+            - read:pets
   /pet/findbytags:
     get:
-      description: Multiple tags can be provided with comma separated strings. Use
-        tag1, tag2, tag3 for testing.
+      tags:
+        - pet
+      summary: Finds Pets by tags
+      description: Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
       operationId: findPetsByTags
       parameters:
-      - description: Tags to filter by
-        explode: true
-        in: query
-        name: tags
-        required: false
-        schema:
-          example:
-          - tags1
-          - tags2
-          items:
-            type: string
-          type: array
-        style: form
+        - name: tags
+          in: query
+          description: Tags to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+            example: [tags1,tags2]
       responses:
-        "200":
+        '200':
+          description: successful operation
           content:
             application/json:
               schema:
+                type: array
                 items:
                   $ref: '#/components/schemas/Pet'
-                type: array
-          description: successful operation
-        "400":
+        '400':
           description: Invalid tag value
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      summary: Finds Pets by tags
-      tags:
-      - pet
-      x-accepts: application/json
-      x-tags:
-      - tag: pet
+        - petstore_auth:
+            - write:pets
+            - read:pets
   /oops:
     get:
-      description: Produces sample error response.
+      tags:
+        - troublemaker
+        - failing
       operationId: failingRequest
+      summary: Always fails
+      description: Produces sample error response.
       responses:
-        "200":
-          content:
-            text/plain:
-              schema:
-                type: string
+        200:
           description: Never returned.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "304":
+        304:
           description: Not modified.
           headers:
             ETag:
               description: An ID for this version of the response.
-              explode: false
               schema:
                 type: string
-              style: simple
-        "400":
+        400:
+          description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-          description: Bad request.
-      summary: Always fails
-      tags:
-      - troublemaker
-      x-accepts: application/json
-      x-tags:
-      - tag: troublemaker
-      - tag: failing
   /version:
     get:
+      tags:
+        - troublemaker
+      summary: Responds with a single plain text version.
       description: Returns plain text.
       operationId: getVersion
+
       responses:
-        "200":
+        '200':
+          description: successful operation
           content:
             text/plain:
               schema:
-                example: Version 1.0.0
                 type: string
-          description: successful operation
+                example: Version 1.0.0
       security:
-      - api_key: []
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      summary: Responds with a single plain text version.
-      tags:
-      - troublemaker
-      x-accepts: text/plain
-      x-tags:
-      - tag: troublemaker
+        - api_key: []
+        - petstore_auth:
+            - write:pets
+            - read:pets
   /pet/{petId}:
-    delete:
-      description: Deletes a pet.
-      operationId: deletePet
-      parameters:
-      - description: Api key.
-        explode: false
-        in: header
-        name: API_KEY
-        required: false
-        schema:
-          example: apikeyvalue1
-          type: string
-        style: simple
-      - description: Pet id to delete
-        explode: false
-        in: path
-        name: petId
-        required: true
-        schema:
-          example: 99
-          format: int64
-          type: integer
-        style: simple
-      responses:
-        "400":
-          description: Invalid pet value
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      summary: Deletes a pet
-      tags:
-      - pet
-      x-accepts: application/json
-      x-tags:
-      - tag: pet
     get:
+      tags:
+        - pet
+        - troublemaker
+      summary: Find pet by ID
       description: Returns a single pet with example of a german Umlaut.
       operationId: getPetById
       parameters:
-      - description: ID of pet to return
-        explode: false
-        in: path
-        name: petId
-        required: true
-        schema:
-          example: 99
-          format: int64
-          type: integer
-        style: simple
+        - name: petId
+          in: path
+          description: ID of pet to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 99
       responses:
-        "200":
+        '200':
+          description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pet'
-          description: successful operation
-        "400":
+        '400':
           description: Invalid ID supplied
-        "404":
+        '404':
           description: Pet not found
       security:
-      - api_key: []
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      summary: Find pet by ID
-      tags:
-      - pet
-      x-accepts: application/json
-      x-tags:
-      - tag: pet
-      - tag: troublemaker
+        - api_key: []
+        - petstore_auth:
+            - write:pets
+            - read:pets
     post:
-      description: Updates a pet in the store with form data.
+      tags:
+        - pet
+      summary: Updates a pet in the store with form data
+      description: 'Updates a pet in the store with form data.'
       operationId: updatePetWithForm
       parameters:
-      - description: ID of pet that needs to be updated
-        explode: false
-        in: path
-        name: petId
-        required: true
-        schema:
-          example: 99
-          format: int64
-          type: integer
-        style: simple
-      - description: Name of pet that needs to be updated
-        explode: true
-        in: query
-        name: name
-        required: false
-        schema:
-          example: dog
-          type: string
-        style: form
-      - description: Status of pet that needs to be updated
-        explode: true
-        in: query
-        name: status
-        required: false
-        schema:
-          example: in progress.
-          type: string
-        style: form
+        - name: petId
+          in: path
+          description: ID of pet that needs to be updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 99
+        - name: name
+          in: query
+          description: Name of pet that needs to be updated
+          schema:
+            type: string
+            example: dog
+        - name: status
+          in: query
+          description: Status of pet that needs to be updated
+          schema:
+            type: string
+            example: in progress.
       responses:
-        "405":
+        '405':
           description: Invalid input
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      summary: Updates a pet in the store with form data
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    delete:
       tags:
-      - pet
-      x-accepts: application/json
-      x-tags:
-      - tag: pet
+        - pet
+      summary: Deletes a pet
+      description: 'Deletes a pet.'
+      operationId: deletePet
+      parameters:
+        - name: API_KEY
+          in: header
+          description: 'Api key.'
+          required: false
+          schema:
+            type: string
+            example: apikeyvalue1
+        - name: petId
+          in: path
+          description: Pet id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 99
+      responses:
+        '400':
+          description: Invalid pet value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
   /pet/{petId}/uploadimage:
     post:
-      description: Uploads an image.
+      tags:
+        - pet
+      summary: uploads an image
+      description: 'Uploads an image.'
       operationId: uploadFile
       parameters:
-      - description: ID of pet to update
-        explode: false
-        in: path
-        name: petId
-        required: true
-        schema:
-          example: 99
-          format: int64
-          type: integer
-        style: simple
-      - description: Additional Metadata
-        explode: true
-        in: query
-        name: additionalMetadata
-        required: false
-        schema:
-          example: metadata
-          type: string
-        style: form
+        - name: petId
+          in: path
+          description: ID of pet to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 99
+        - name: additionalMetadata
+          in: query
+          description: Additional Metadata
+          required: false
+          schema:
+            type: string
+            example: metadata
       requestBody:
         content:
           application/octet-stream:
             schema:
-              format: binary
               type: string
+              format: binary
       responses:
-        "200":
+        '200':
+          description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
-          description: successful operation
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      summary: uploads an image
-      tags:
-      - pet
-      x-contentType: application/octet-stream
-      x-accepts: application/json
-      x-tags:
-      - tag: pet
+        - petstore_auth:
+            - write:pets
+            - read:pets
   /store/inventory:
     get:
+      tags:
+        - store
+      summary: Returns pet inventories by status
       description: Returns a map of status codes to quantities
       operationId: getInventory
       responses:
-        "200":
+        '200':
+          description: successful operation
           content:
             application/json:
               schema:
-                additionalProperties:
-                  format: int32
-                  type: integer
                 type: object
-          description: successful operation
+                additionalProperties:
+                  type: integer
+                  format: int32
       security:
-      - api_key: []
-      summary: Returns pet inventories by status
-      tags:
-      - store
-      x-accepts: application/json
-      x-tags:
-      - tag: store
+        - api_key: []
   /store/order:
     post:
+      tags:
+        - store
+      summary: Place an order for a pet
       description: Place a new order in the store
       operationId: placeOrder
       requestBody:
@@ -701,749 +599,640 @@ paths:
             schema:
               $ref: '#/components/schemas/Order'
       responses:
-        "200":
+        '200':
+          description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
-          description: successful operation
-        "405":
+        '405':
           description: Invalid input
-      summary: Place an order for a pet
-      tags:
-      - store
-      x-contentType: application/json
-      x-accepts: application/json
-      x-tags:
-      - tag: store
   /store/order/{orderId}:
-    delete:
-      description: For valid response try integer IDs with value < 1000. Anything
-        above 1000 or nonintegers will generate API errors
-      operationId: deleteOrder
-      parameters:
-      - description: ID of the order that needs to be deleted
-        explode: false
-        in: path
-        name: orderId
-        required: true
-        schema:
-          example: 1001
-          format: int64
-          type: integer
-        style: simple
-      responses:
-        "400":
-          description: Invalid ID supplied
-        "404":
-          description: Order not found
-      summary: Delete purchase order by ID
-      tags:
-      - store
-      x-accepts: application/json
-      x-tags:
-      - tag: store
     get:
-      description: For valid response try integer IDs with value <= 5 or > 10. Other
-        values will generated exceptions
+      tags:
+        - store
+        - troublemaker
+      summary: Find purchase order by ID
+      description: For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
       operationId: getOrderById
       parameters:
-      - description: ID of order that needs to be fetched
-        explode: false
-        in: path
-        name: orderId
-        required: true
-        schema:
-          example: 1001
-          format: int64
-          type: integer
-        style: simple
+        - name: orderId
+          in: path
+          description: ID of order that needs to be fetched
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1001
       responses:
-        "200":
+        '200':
+          description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
-          description: successful operation
-        "400":
+        '400':
           description: Invalid ID supplied
-        "404":
+        '404':
           description: Order not found
-      summary: Find purchase order by ID
+    delete:
       tags:
-      - store
-      x-accepts: application/json
-      x-tags:
-      - tag: store
-      - tag: troublemaker
+        - store
+      summary: Delete purchase order by ID
+      description: For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
+      operationId: deleteOrder
+      parameters:
+        - name: orderId
+          in: path
+          description: ID of the order that needs to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1001
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Order not found
   /user:
     post:
+      tags:
+        - user
+      summary: Create user
       description: This can only be done by the logged in user.
       operationId: createUser
       requestBody:
+        description: Created user object
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
-        description: Created user object
       responses:
         default:
+          description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-          description: successful operation
-      summary: Create user
-      tags:
-      - user
-      x-contentType: application/json
-      x-accepts: application/json
-      x-tags:
-      - tag: user
   /user/createwithlist:
     post:
+      tags:
+        - user
+      summary: Creates list of users with given input array
       description: Creates list of users with given input array
       operationId: createUsersWithListInput
       requestBody:
         content:
           application/json:
             schema:
+              type: array
               items:
                 $ref: '#/components/schemas/User'
-              type: array
       responses:
-        "200":
+        '200':
+          description: Successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-          description: Successful operation
         default:
           description: successful operation
-      summary: Creates list of users with given input array
-      tags:
-      - user
-      x-contentType: application/json
-      x-accepts: application/json
-      x-tags:
-      - tag: user
   /user/login:
     get:
-      description: Logs user into the system
+      tags:
+        - user
+      summary: Logs user into the system
+      description: 'Logs user into the system'
       operationId: loginUser
       parameters:
-      - description: The user name for login
-        explode: true
-        in: query
-        name: username
-        required: false
-        schema:
-          example: jonny
-          type: string
-        style: form
-      - description: The password for login in clear text
-        explode: true
-        in: query
-        name: password
-        required: false
-        schema:
-          example: password
-          type: string
-        style: form
+        - name: username
+          in: query
+          description: The user name for login
+          required: false
+          schema:
+            type: string
+            example: jonny
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: false
+          schema:
+            type: string
+            example: password
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: string
+        '200':
           description: successful operation
           headers:
             X-Rate-Limit:
               description: calls per hour allowed by the user
-              explode: false
               schema:
-                example: 100
-                format: int32
                 type: integer
-              style: simple
+                format: int32
+                example: 100
             X-Expires-After:
               description: date in UTC when token expires
-              explode: false
               schema:
-                example: 2017-07-21T17:32:28Z
-                format: date-time
                 type: string
-              style: simple
-        "400":
+                format: date-time
+                example: '2017-07-21T17:32:28Z'
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
           description: Invalid username/password supplied
-      summary: Logs user into the system
-      tags:
-      - user
-      x-accepts: application/json
-      x-tags:
-      - tag: user
   /user/logout:
     get:
-      description: Logs out current logged in user session
+      tags:
+        - user
+      summary: Logs out current logged in user session
+      description: 'Logs out current logged in user session'
       operationId: logoutUser
       parameters: []
       responses:
         default:
           description: successful operation
-      summary: Logs out current logged in user session
-      tags:
-      - user
-      x-accepts: application/json
-      x-tags:
-      - tag: user
   /user/{username}:
-    delete:
-      description: This can only be done by the logged in user.
-      operationId: deleteUser
-      parameters:
-      - description: The name that needs to be deleted
-        explode: false
-        in: path
-        name: username
-        required: true
-        schema:
-          example: jonny
-          type: string
-        style: simple
-      responses:
-        "400":
-          description: Invalid username supplied
-        "404":
-          description: User not found
-      summary: Delete user
-      tags:
-      - user
-      x-accepts: application/json
-      x-tags:
-      - tag: user
     get:
-      description: Get user by user name
+      tags:
+        - user
+      summary: Get user by user name
+      description: 'Get user by user name'
       operationId: getUserByName
       parameters:
-      - description: 'The name that needs to be fetched. Use user1 for testing. '
-        explode: false
-        in: path
-        name: username
-        required: true
-        schema:
-          example: jonny
-          type: string
-        style: simple
+        - name: username
+          in: path
+          description: 'The name that needs to be fetched. Use user1 for testing. '
+          required: true
+          schema:
+            type: string
+            example: jonny
       responses:
-        "200":
+        '200':
+          description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-          description: successful operation
-        "400":
+        '400':
           description: Invalid username supplied
-        "404":
+        '404':
           description: User not found
-      summary: Get user by user name
-      tags:
-      - user
-      x-accepts: application/json
-      x-tags:
-      - tag: user
     put:
+      tags:
+        - user
+      summary: Update user
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
-      - description: name that need to be deleted
-        explode: false
-        in: path
-        name: username
-        required: true
-        schema:
-          example: jonny
-          type: string
-        style: simple
+        - name: username
+          in: path
+          description: name that need to be deleted
+          required: true
+          schema:
+            type: string
+            example: jonny
       requestBody:
+        description: Update an existent user in the store
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
-        description: Update an existent user in the store
       responses:
         default:
           description: successful operation
-      summary: Update user
+    delete:
       tags:
-      - user
-      x-contentType: application/json
-      x-accepts: application/json
-      x-tags:
-      - tag: user
+        - user
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+        - name: username
+          in: path
+          description: The name that needs to be deleted
+          required: true
+          schema:
+            type: string
+            example: jonny
+      responses:
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
 components:
-  requestBodies:
-    Pet:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Pet'
-      description: Pet object that needs to be added to the store
-    UserArray:
-      content:
-        application/json:
-          schema:
-            items:
-              $ref: '#/components/schemas/User'
-            type: array
-      description: List of user object
   schemas:
     Book:
+      title: Book
+      type: object
       properties:
         author:
           type: string
         errorMsg:
           type: string
         id:
-          format: int64
           type: integer
+          format: int64
         language:
           type: string
         title:
           type: string
-      title: Book
-      type: object
     BookResource:
-      properties:
-        _links:
-          items:
-            $ref: '#/components/schemas/Link'
-          type: array
-          xml:
-            attribute: false
-            name: link
-            wrapped: false
-        book:
-          $ref: '#/components/schemas/Book'
       title: BookResource
       type: object
+      properties:
+        _links:
+          type: array
+          xml:
+            name: link
+            attribute: false
+            wrapped: false
+          items:
+            $ref: '#/components/schemas/Link'
+        book:
+          $ref: '#/components/schemas/Book'
     Customer:
-      example:
-        name: name
-        company: company
-        id: 0
-        errorMsg: errorMsg
+      title: Customer
+      type: object
       properties:
         company:
           type: string
         errorMsg:
           type: string
         id:
-          format: int64
           type: integer
+          format: int64
         name:
           type: string
-      title: Customer
-      type: object
     CustomerResource:
-      properties:
-        _links:
-          items:
-            $ref: '#/components/schemas/Link'
-          type: array
-          xml:
-            attribute: false
-            name: link
-            wrapped: false
-        customer:
-          $ref: '#/components/schemas/Customer'
       title: CustomerResource
       type: object
+      properties:
+        _links:
+          type: array
+          xml:
+            name: link
+            attribute: false
+            wrapped: false
+          items:
+            $ref: '#/components/schemas/Link'
+        customer:
+          $ref: '#/components/schemas/Customer'
     Link:
+      title: Link
+      type: object
       properties:
         deprecation:
           type: string
           xml:
-            attribute: true
             name: deprecation
+            attribute: true
             wrapped: false
         href:
           type: string
           xml:
-            attribute: true
             name: href
+            attribute: true
             wrapped: false
         hreflang:
           type: string
           xml:
-            attribute: true
             name: hreflang
+            attribute: true
             wrapped: false
         media:
           type: string
           xml:
-            attribute: true
             name: media
+            attribute: true
             wrapped: false
         rel:
           type: string
           xml:
-            attribute: true
             name: rel
+            attribute: true
             wrapped: false
         templated:
           type: boolean
         title:
           type: string
           xml:
-            attribute: true
             name: title
+            attribute: true
             wrapped: false
         type:
           type: string
           xml:
-            attribute: true
             name: type
+            attribute: true
             wrapped: false
-      title: Link
-      type: object
     ResourcesBookResource:
-      properties:
-        _embedded:
-          items:
-            $ref: '#/components/schemas/BookResource'
-          type: array
-          xml:
-            attribute: false
-            name: embedded
-            wrapped: true
-        _links:
-          items:
-            $ref: '#/components/schemas/Link'
-          type: array
-          xml:
-            attribute: false
-            name: link
-            wrapped: false
       title: Resources«BookResource»
       type: object
-    ResourcesCustomerResource:
       properties:
         _embedded:
-          items:
-            $ref: '#/components/schemas/CustomerResource'
           type: array
           xml:
-            attribute: false
             name: embedded
+            attribute: false
             wrapped: true
+          items:
+            $ref: '#/components/schemas/BookResource'
         _links:
+          type: array
+          xml:
+            name: link
+            attribute: false
+            wrapped: false
           items:
             $ref: '#/components/schemas/Link'
-          type: array
-          xml:
-            attribute: false
-            name: link
-            wrapped: false
+    ResourcesCustomerResource:
       title: Resources«CustomerResource»
       type: object
-    ResourceCustomerResource:
       properties:
-        _links:
-          items:
-            $ref: '#/components/schemas/Link'
+        _embedded:
           type: array
           xml:
+            name: embedded
             attribute: false
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/CustomerResource'
+        _links:
+          type: array
+          xml:
             name: link
+            attribute: false
             wrapped: false
-        customer:
-          $ref: '#/components/schemas/Customer'
+          items:
+            $ref: '#/components/schemas/Link'
+    ResourceCustomerResource:
       title: Resource«CustomerResource»
       type: object
-    Resourceobject:
       properties:
         _links:
-          items:
-            $ref: '#/components/schemas/Link'
           type: array
           xml:
-            attribute: false
             name: link
+            attribute: false
             wrapped: false
+          items:
+            $ref: '#/components/schemas/Link'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Resourceobject:
       title: Resource«object»
       type: object
+      properties:
+        _links:
+          type: array
+          xml:
+            name: link
+            attribute: false
+            wrapped: false
+          items:
+            $ref: '#/components/schemas/Link'
     Order:
-      example:
-        petId: 198772
-        rabatt: 25.9
-        quantity: 7
-        pricebrutto: 345.45
-        pricenetto: 300.0
-        id: 10
-        shipDate: 2017-07-21T17:32:28Z
-        complete: true
-        status: approved
+      type: object
       properties:
         id:
-          description: Id of the order.
-          example: 10
-          format: int64
           type: integer
+          format: int64
+          example: 10
+          description: 'Id of the order.'
         petId:
-          description: PetId
+          type: integer
+          format: int64
           example: 198772
-          format: int64
-          type: integer
+          description: 'PetId'
         pricebrutto:
-          description: Brutto price
+          type: number
+          format: float
           example: 345.45
-          format: float
-          type: number
+          description: Brutto price
         pricenetto:
+          type: number
+          format: float
+          example: 300.00
           description: Netto price
-          example: 300.0
-          format: float
-          type: number
         rabatt:
-          description: Rabatt reduction.
-          example: 25.9
-          format: float
           type: number
+          format: float
+          example: 25.90
+          description: Rabatt reduction.
         quantity:
-          description: Quantity
-          example: 7
+          type: integer
           format: int32
-          type: integer
+          example: 7
+          description: 'Quantity'
         shipDate:
-          description: Shipping date.
-          example: 2017-07-21T17:32:28Z
+          type: string
           format: date-time
-          type: string
+          example: '2017-07-21T17:32:28Z'
+          description: 'Shipping date.'
         status:
+          type: string
           description: Order Status
-          enum:
-          - placed
-          - approved
-          - delivered
           example: approved
-          type: string
+          enum:
+            - placed
+            - approved
+            - delivered
         complete:
-          description: Order completed.
-          example: true
           type: boolean
-      type: object
+          example: true
+          description: Order completed.
     Category:
-      example:
-        name: Dogs
-        id: 1
-      properties:
-        id:
-          description: Id
-          example: 1
-          format: int64
-          type: integer
-        name:
-          description: Name of category.
-          example: Dogs
-          type: string
       type: object
-    User:
-      example:
-        firstName: John
-        lastName: James
-        password: password
-        userStatus: 1
-        phone: "012345"
-        id: 10
-        email: john@email.com
-        username: theUser
       properties:
         id:
-          description: Id
-          example: 10
-          format: int64
           type: integer
+          format: int64
+          example: 1
+          description: 'Id'
+        name:
+          type: string
+          example: Dogs
+          description: 'Name of category.'
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          description: 'Id'
         username:
-          description: Username
+          type: string
           example: theUser
-          type: string
+          description: 'Username'
         firstName:
-          description: First name
+          type: string
           example: John
-          type: string
+          description: 'First name'
         lastName:
-          description: Last name
-          example: James
           type: string
+          example: James
+          description: 'Last name'
         email:
-          description: User mail address.
+          type: string
           example: john@email.com
           format: email
-          type: string
+          description: 'User mail address.'
         password:
-          description: Password.
-          example: password
           type: string
+          example: 'password'
+          description: 'Password.'
         phone:
-          description: Phone number
-          example: "012345"
           type: string
+          example: '012345'
+          description: 'Phone number'
         userStatus:
+          type: integer
           description: User Status
-          example: 1
           format: int32
-          type: integer
-      type: object
-    Tag:
-      example:
-        name: tag1
-        id: 1
-      properties:
-        id:
-          description: Id
           example: 1
-          format: int64
-          type: integer
-        name:
-          description: Name of tag.
-          example: tag1
-          type: string
+
+    Tag:
       type: object
-    Pet:
-      example:
-        photoUrls:
-        - http://example.com/photo.png
-        - http://example.com/photo2
-        - png
-        name: SChäferhund
-        id: 10
-        category:
-          name: Dogs
-          id: 1
-        tags:
-        - name: tag1
-          id: 1
-        - name: tag1
-          id: 1
-        status: available
       properties:
         id:
-          description: Id
-          example: 10
-          format: int64
           type: integer
+          format: int64
+          example: 1
+          description: 'Id'
         name:
-          description: Name
-          example: SChäferhund
           type: string
+          example: tag1
+          description: 'Name of tag.'
+    Pet:
+      required:
+        - name
+        - photoUrls
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          description: 'Id'
+        name:
+          type: string
+          example: SChäferhund
+          description: 'Name'
         category:
           $ref: '#/components/schemas/Category'
         photoUrls:
-          description: Photo urls.
-          example:
-          - http://example.com/photo.png
-          - http://example.com/photo2
-          - png
+          type: array
           items:
             type: string
-          type: array
+          example: [http://example.com/photo.png, http://example.com/photo2,png]
+          description: 'Photo urls.'
         tags:
+          type: array
           items:
             $ref: '#/components/schemas/Tag'
-          type: array
         status:
+          type: string
           description: pet status in the store
           enum:
-          - available
-          - pending
-          - sold
+            - available
+            - pending
+            - sold
           example: available
-          type: string
-      required:
-      - name
-      - photoUrls
-      type: object
     RestError:
+      title: REST Error
       description: The schema for all error responses.
+      type: object
       properties:
         status:
-          description: The HTTP status code.
-          example: 400
-          format: int32
-          readOnly: true
           title: Status
+          description: The HTTP status code.
           type: integer
+          format: int32
+          example: 400
+          readOnly: true
         error:
+          title: Error
           description: The short error message.
+          type: string
           example: Bad Request
           readOnly: true
-          title: Error
-          type: string
         path:
-          description: The path of the URL for this request.
-          example: /api/owners
-          format: uri
-          readOnly: true
           title: Path
+          description: The path of the URL for this request.
           type: string
+          format: uri
+          example: '/api/owners'
+          readOnly: true
         timestamp:
-          description: The time the error occured.
-          format: date-time
-          readOnly: true
           title: Timestamp
+          description: The time the error occured.
           type: string
+          format: date-time
+          example: '2019-08-21T21:41:46.158+0000'
+          readOnly: true
         message:
-          description: The long error message.
-          example: Request failed schema validation
-          readOnly: true
           title: Message
+          description: The long error message.
           type: string
-        trace:
-          description: The stacktrace for this error.
-          example: 'com.atlassian.oai.validator.springmvc.InvalidRequestException:
-            ...'
+          example: 'Request failed schema validation'
           readOnly: true
+        trace:
           title: Trace
+          description: The stacktrace for this error.
           type: string
+          example: 'com.atlassian.oai.validator.springmvc.InvalidRequestException: ...'
+          readOnly: true
       required:
-      - error
-      - message
-      - path
-      - schemaValidationErrors
-      - status
-      - timestamp
-      title: REST Error
-      type: object
+        - status
+        - error
+        - path
+        - timestamp
+        - message
+        - schemaValidationErrors
     ApiResponse:
-      example:
-        code: 123
-        type: responsetype
-        message: Message.
+      type: object
       properties:
         code:
-          description: Code
-          example: 123
-          format: int32
           type: integer
+          format: int32
+          example: 123
+          description: 'Code'
         type:
-          description: Response type
+          type: string
           example: responsetype
-          type: string
+          description: 'Response type'
         message:
-          description: The message.
-          example: Message.
           type: string
-      type: object
+          example: Message.
+          description: 'The message.'
+  requestBodies:
+    Pet:
+      description: Pet object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pet'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
   securitySchemes:
     petstore_auth:
+      type: oauth2
       flows:
         implicit:
           authorizationUrl: https://petstore3.swagger.io/oauth/authorize
           scopes:
             write:pets: modify pets in your account
             read:pets: read your pets
-      type: oauth2
     api_key:
-      in: header
-      name: api_key
       type: apiKey
+      name: api_key
+      in: header

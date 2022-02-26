@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T18:39:00.977440+01:00[Europe/Zurich]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T19:49:48.701044+01:00[Europe/Zurich]")
 @Validated
 @Tag(name = "store", description = "the store API")
 public interface StoreApi {
@@ -63,7 +63,7 @@ public interface StoreApi {
     default ResponseEntity<Void> deleteOrder(
         @Parameter(name = "orderId", description = "ID of the order that needs to be deleted", required = true, schema = @Schema(description = "")) @PathVariable("orderId") Long orderId
     ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
@@ -93,7 +93,7 @@ public interface StoreApi {
     default ResponseEntity<Map<String, Integer>> getInventory(
         
     ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
@@ -110,7 +110,7 @@ public interface StoreApi {
     @Operation(
         operationId = "getOrderById",
         summary = "Find purchase order by ID",
-        tags = { "store", "troublemaker" },
+        tags = { "store" },
         responses = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation =  Order.class))),
             @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
@@ -134,7 +134,7 @@ public interface StoreApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 
@@ -174,7 +174,7 @@ public interface StoreApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 

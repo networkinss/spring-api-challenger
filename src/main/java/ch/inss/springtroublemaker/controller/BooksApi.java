@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T18:39:00.977440+01:00[Europe/Zurich]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-02-26T19:49:48.701044+01:00[Europe/Zurich]")
 @Validated
 @Tag(name = "books", description = "the books API")
 public interface BooksApi {
@@ -68,14 +68,14 @@ public interface BooksApi {
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/hal+json"))) {
                     String exampleString = "";
-                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    ApiUtil.setExampleResponse(request, "application/hal+json", exampleString);
                     break;
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 
@@ -109,14 +109,14 @@ public interface BooksApi {
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/hal+json"))) {
                     String exampleString = "";
-                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    ApiUtil.setExampleResponse(request, "application/hal+json", exampleString);
                     break;
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.valueOf(200));
 
     }
 
