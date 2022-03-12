@@ -2,8 +2,8 @@ openapi: 3.0.2
 info:
   title: Petstore, the troublemaker - OpenAPI 3.0
   description: |-
-    Forked and modified by International Network Support & Service - Glas.
-    This document contains some more endpoints containing APIs that don't have only common formats like application/json and other commonly used formats, and contains also float numbers and Umlaute.
+    Some sample APIs collected by International Network Support & Service - Glas.
+    This document contains endpoints containing APIs that don't have only common formats like application/json, but more uncommon but standard formats like float numbers and special characters like german Umlaute.
     This is to test & check if a tool can handle also those formats.
   termsOfService: http://inss.ch
   contact:
@@ -321,7 +321,8 @@ paths:
     get:
       tags:
         - pet
-      summary: Finds Pets by status
+        - troublemaker
+      summary: Two media types, application/json and application/xml.
       description: Multiple status values can be provided with comma separated strings
       operationId: findPetsByStatus
       parameters:
@@ -343,6 +344,11 @@ paths:
           description: successful operation
           content:
             application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+            application/xml:
               schema:
                 type: array
                 items:
@@ -392,7 +398,7 @@ paths:
         - troublemaker
         - failing
       operationId: failingRequest
-      summary: Always fails
+      summary: Always fails with 400.
       description: Produces sample error response.
       responses:
         200:
@@ -415,7 +421,7 @@ paths:
     get:
       tags:
         - troublemaker
-      summary: Responds with a single plain text version.
+      summary: Mediatype plain/text.
       description: Returns plain text.
       operationId: getVersion
 
@@ -437,7 +443,7 @@ paths:
       tags:
         - pet
         - troublemaker
-      summary: Find pet by ID
+      summary: Sample data contains german umlaut.
       description: Returns a single pet with example of a german Umlaut.
       operationId: getPetById
       parameters:
@@ -573,8 +579,8 @@ paths:
       tags:
         - store
         - troublemaker
-      summary: Returns pet inventories by status. Values in JSON are in random order.
-      description: Returns a map of status codes to quantities. Values in JSON are in random order. 
+      summary: JSON values in random order.
+      description: Returns a map of status codes to quantities. Values in JSON are in random order.
       operationId: getInventory
       responses:
         '200':
@@ -614,8 +620,8 @@ paths:
       tags:
         - store
         - troublemaker
-      summary: Find purchase order by ID
-      description: For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
+      summary: Data contain float numbers.
+      description: For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.
       operationId: getOrderById
       parameters:
         - name: orderId

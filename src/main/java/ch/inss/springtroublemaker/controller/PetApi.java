@@ -115,38 +115,43 @@ public interface PetApi {
 
 
     /**
-     * GET /pet/findbystatus : Finds Pets by status
+     * GET /pet/findbystatus : Two media types, application/json and application/xml.
      * Multiple status values can be provided with comma separated strings
      *
      * @param status Status values that need to be considered for filter (optional, default to available)
      * @return successful operation (status code 200)
-     *         or Invalid status value (status code 400)
+     * or Invalid status value (status code 400)
      */
     @Operation(
-        operationId = "findPetsByStatus",
-        summary = "Finds Pets by status",
-        tags = { "pet" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation =  Pet.class))),
-            @ApiResponse(responseCode = "400", description = "Invalid status value")
-        },
-        security = {
-            @SecurityRequirement(name = "petstore_auth", scopes={ "write:pets", "read:pets" })
-        }
+            operationId = "findPetsByStatus",
+            summary = "Two media types, application/json and application/xml.",
+            tags = {"pet"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Pet.class))),
+                    @ApiResponse(responseCode = "400", description = "Invalid status value")
+            },
+            security = {
+                    @SecurityRequirement(name = "petstore_auth", scopes = {"write:pets", "read:pets"})
+            }
     )
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/pet/findbystatus",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/pet/findbystatus",
+            produces = {"application/json", "application/xml"}
     )
     default ResponseEntity<List<Pet>> findPetsByStatus(
-        @Parameter(name = "status", description = "Status values that need to be considered for filter", schema = @Schema(description = "", allowableValues = { "available", "pending", "sold" }, defaultValue = "available")) @Valid @RequestParam(value = "status", required = false, defaultValue = "available") String status
+            @Parameter(name = "status", description = "Status values that need to be considered for filter", schema = @Schema(description = "", allowableValues = {"available", "pending", "sold"}, defaultValue = "available")) @Valid @RequestParam(value = "status", required = false, defaultValue = "available") String status
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"photoUrls\" : [ \"http://example.com/photo.png\", \"http://example.com/photo2\", \"png\" ], \"name\" : \"SChäferhund\", \"id\" : 10, \"category\" : { \"name\" : \"Dogs\", \"id\" : 1 }, \"tags\" : [ { \"name\" : \"tag1\", \"id\" : 1 }, { \"name\" : \"tag1\", \"id\" : 1 } ], \"status\" : \"available\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
+                    String exampleString = "<Pet> <id>10</id> <name>SChäferhund</name> <photoUrls>aeiou</photoUrls> <status>available</status> </Pet>";
+                    ApiUtil.setExampleResponse(request, "application/xml", exampleString);
                     break;
                 }
             }
