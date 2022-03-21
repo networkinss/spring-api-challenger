@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: Petstore, the troublemaker - OpenAPI 3.0
+  title: Petstore, the troublemaker of OpenAPI 3.0
   description: |-
     Some sample APIs collected by International Network Support & Service - Glas.
     This document contains endpoints containing APIs that don't have only common formats like application/json, but more uncommon but standard formats like float numbers and special characters like german Umlaute.
