@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"ch.inss.springtroublemaker", "ch.inss.springtroublemaker.controller" , "ch.inss.springtroublemaker.config"})
+@ComponentScan(basePackages = {"ch.inss.springapichallenge", "ch.inss.springapichallenge.controller" , "ch.inss.springapichallenge.config"})
 public class OpenAPI2SpringBoot implements CommandLineRunner {
 
     @Override

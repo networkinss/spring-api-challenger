@@ -73,12 +73,9 @@
                         <configuration>
                             <inputSpec>${inputSpec.profile}</inputSpec>
                             <generatorName>spring</generatorName>
-                            <!--                            <apiPackage>ch.inss.springapichallenge.api</apiPackage>-->
-                            <!--                            <modelPackage>ch.inss.springapichallenge.model</modelPackage>-->
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <generateApis>true</generateApis>
                             <generateModels>true</generateModels>
-                            <!--                            <modelNamePrefix>DTO</modelNamePrefix>-->
                             <generateSupportingFiles>true</generateSupportingFiles>
                             <configOptions>
                                 <skipDefaultInterface>false</skipDefaultInterface>
