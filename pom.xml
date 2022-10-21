@@ -79,10 +79,10 @@
                             <generateApis>true</generateApis>
                             <generateModels>true</generateModels>
                             <!--                            <modelNamePrefix>DTO</modelNamePrefix>-->
-                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <generateSupportingFiles>true</generateSupportingFiles>
                             <configOptions>
                                 <skipDefaultInterface>false</skipDefaultInterface>
-                                <interfaceOnly>true</interfaceOnly>
+                                <interfaceOnly>false</interfaceOnly>
                                 <modelPackage>ch.inss.springapichallenge.model</modelPackage>
                                 <sourceFolder>src/main/java</sourceFolder>
                                 <groupId>ch.inss.openapimaker</groupId>
@@ -90,7 +90,7 @@
                                 <configPackage>ch.inss.springapichallenge.config</configPackage>
                                 <basePackage>ch.inss.springapichallenge</basePackage>
                                 <returnSuccessCode>false</returnSuccessCode>
-                                <apiPackage>ch.inss.springapichallenge.api</apiPackage>
+                                <apiPackage>ch.inss.springapichallenge.controller</apiPackage>
                                 <useTags>true</useTags>
                             </configOptions>
                         </configuration>

@@ -10,7 +10,19 @@ also stuff like special characters (german Umlaute) or correctly processes float
 
 Contributions to more APIs that cannot be found in the common petstore samples are welcome.
 
+### Docker build
+
 mvn spring-boot:build-image
+
+### Start application
+
+mvn spring-boot:run
+
+### Generate interfaces and models.
+
+mvn clean generate-resources -P home  
+This will not compile due to duplicate classes.   
+Sources can be copied to the application to integrate new APIs.
 
 ## Docker
 

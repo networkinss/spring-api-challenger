@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: Petstore, a troublemaker for OpenAPI 3.0 tools
+  title: Petstore, the troublemaker of OpenAPI 3.0
   description: |-
     Some sample APIs collected by International Network Support & Service - Glas.
     This document contains endpoints containing APIs that don't have only common formats like application/json, but more uncommon but standard formats like float numbers and special characters like german Umlaute.
@@ -537,7 +537,7 @@ paths:
   /pet/uploadbinplusobject:
     post:
       tags:
-        - pet
+        - petobject
         - troublemaker
       summary: uploads a binary file plus json
       description: 'Uploads a binary file including a json object.'
@@ -571,7 +571,7 @@ paths:
   /pet/uploadbinary:
     post:
       tags:
-        - pet
+        - petobject
       summary: uploads a binary file
       description: 'Uploads a binary file.'
       operationId: uploadBinary
