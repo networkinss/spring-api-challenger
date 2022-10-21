@@ -10,18 +10,92 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <springdoc.version>1.6.4</springdoc.version>
+        <inputSpec.profile>src/main/resources/openapi.yaml</inputSpec.profile>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.6.2</version>
     </parent>
+    <profiles>
+        <profile>
+            <id>nogen</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.openapitools</groupId>
+                        <artifactId>openapi-generator-maven-plugin</artifactId>
+                        <version>6.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>generator
+                                </id> <!-- here there must be the same identifier as defined in <build><plugins> section -->
+                                <phase>none</phase> <!-- this disables plugin -->
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>home</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <maven.test.skip>false</maven.test.skip>
+            </properties>
+        </profile>
+    </profiles>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>6.2.0</version>
+                <executions>
+                    <execution>
+                        <id>generator</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${inputSpec.profile}</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <!--                            <apiPackage>ch.inss.springapichallenge.api</apiPackage>-->
+                            <!--                            <modelPackage>ch.inss.springapichallenge.model</modelPackage>-->
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <generateApis>true</generateApis>
+                            <generateModels>true</generateModels>
+                            <!--                            <modelNamePrefix>DTO</modelNamePrefix>-->
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <configOptions>
+                                <skipDefaultInterface>false</skipDefaultInterface>
+                                <interfaceOnly>true</interfaceOnly>
+                                <modelPackage>ch.inss.springapichallenge.model</modelPackage>
+                                <sourceFolder>src/main/java</sourceFolder>
+                                <groupId>ch.inss.openapimaker</groupId>
+                                <invokerPackage>ch.inss.springapichallenge</invokerPackage>
+                                <configPackage>ch.inss.springapichallenge.config</configPackage>
+                                <basePackage>ch.inss.springapichallenge</basePackage>
+                                <returnSuccessCode>false</returnSuccessCode>
+                                <apiPackage>ch.inss.springapichallenge.api</apiPackage>
+                                <useTags>true</useTags>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
