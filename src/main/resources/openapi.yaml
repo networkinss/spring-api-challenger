@@ -579,15 +579,15 @@ paths:
         content:
           multipart/form-data:
             schema:
-            type: object
-            properties:
-              orderId:
-                type: integer
-              userId:
-                type: integer
-              fileName:
-                type: string
-                format: binary
+              type: object
+              properties:
+                orderId:
+                  type: integer
+                userId:
+                  type: integer
+                fileName:
+                  type: string
+                  format: binary
       responses:
         '201':
           description: successful operation
@@ -1203,7 +1203,7 @@ components:
           type: array
           items:
             type: string
-          example: [http://example.com/photo.png, http://example.com/photo2,png]
+          example: '[http://example.com/photo.png, http://example.com/photo2,png]'
           description: 'Photo urls.'
         tags:
           type: array
