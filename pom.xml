@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ch.inss.springtroublemaker</groupId>
-    <artifactId>petstoretroublemaker</artifactId>
+    <groupId>ch.inss.springapichallenge</groupId>
+    <artifactId>springapichallenge</artifactId>
     <packaging>jar</packaging>
-    <name>petstoretroublemaker</name>
-    <version>0.0.1</version>
+    <name>Spring-API-Challenge</name>
+    <version>0.0.2</version>
     <properties>
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
