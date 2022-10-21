@@ -583,8 +583,12 @@ paths:
               properties:
                 orderId:
                   type: integer
+                  format: int32
+                  example: 999
                 userId:
                   type: integer
+                  format: int64
+                  example: 10001000
                 fileName:
                   type: string
                   format: binary
